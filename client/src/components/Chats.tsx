@@ -16,8 +16,8 @@ const Chats: React.FC<ChatsProps> = ({ chatLog }) => {
                     <div className={`flex-10 ${chat.user==="me"?"bg-slate-600":"bg-teal-800"} h-10 w-10 flex items-center justify-center text-stone-900`} style={{ borderRadius: "50%" }}>
                       {chat.user==="me"?"Me":"C"}
                     </div>
-                    <div className="flex-1">
-                      {chat.message}
+                    <div className={`flex-1 ${chat.user==="me"?"":"Typewriter"}`}>
+                     <p>{chat.message}</p>  
                     </div>
                 </div>
             )

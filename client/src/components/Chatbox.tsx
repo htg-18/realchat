@@ -112,16 +112,14 @@ const Chatbox: React.FC = () => {
       inputRef.current.focus();
     }
   };
-  
-  
-  
- return (
+  const shouldRenderDefaultAndKeywordButtons = window.innerWidth > 700;
+  return (
     <div className='flex flex-col min-h-screen bg-[#343541] w-full p-12'>
       {chatLog.length>0 && 
       <button 
       className='rounded-[12px] h-10 w-[180px] hover:bg-zinc-600 m-auto mt-3 mb-3' style={{border: '0.8px solid white'}}
       onClick={handleClear}>Clear Chats</button>}
-      {chatLog.length===0 && <Default/>}
+      {chatLog.length===0 && shouldRenderDefaultAndKeywordButtons&& <Default/>}
       
       <div
         ref={chatContainerRef}
@@ -130,7 +128,7 @@ const Chatbox: React.FC = () => {
       >
         <Chats chatLog={chatLog} />
       </div>
-      {chatLog.length==0 && <KeywordButtons keywords={['Greeting', 'Weather', 'News', 'Help','Anime','Movie','Food']} onKeywordClick={handleKeywordClick} />}
+      {chatLog.length==0 && shouldRenderDefaultAndKeywordButtons && <KeywordButtons keywords={['Greeting', 'Weather', 'News', 'Help','Anime','Movie','Food']} onKeywordClick={handleKeywordClick} />}
       <form
         onSubmit={handleSubmit}
         style={{ border: '0.5px solid white ', borderRadius: '12px' }}
@@ -175,3 +173,4 @@ const Chatbox: React.FC = () => {
 };
 
 export default Chatbox;
+
