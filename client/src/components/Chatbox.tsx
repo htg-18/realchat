@@ -37,7 +37,7 @@ const Chatbox: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/response', {
+      const response = await fetch('https://chat-backend-gold.vercel.app/response', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

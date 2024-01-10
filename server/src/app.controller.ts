@@ -6,7 +6,7 @@ import { responses } from './responses';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('hello')
+  @Get()
   getHello(st:string): string {
     return this.appService.getHello("Hello");
   }
