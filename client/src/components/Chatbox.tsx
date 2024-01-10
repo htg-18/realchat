@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import Chats from './Chats';
 import { IoIosSend } from 'react-icons/io';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ChatMessage {
   user: string;
@@ -17,7 +19,7 @@ const Chatbox: React.FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log('Fetching chat log from local storage.  1 ..');
+    // console.log('Fetching chat log from local storage.  1 ..');
     const storedChatLog = localStorage.getItem('chatLog');
     if (storedChatLog) {
       setChatLog(JSON.parse(storedChatLog));
@@ -25,7 +27,8 @@ const Chatbox: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    console.log('Storing chat log to local storage.  2..');
+    // console.log('Storing chat log to local storage.  2..');
+    
     localStorage.setItem('chatLog', JSON.stringify(chatLog));
 
     if (chatContainerRef.current) {
@@ -35,40 +38,80 @@ const Chatbox: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
     try {
-      const response = await fetch('https://realchat-kora.vercel.app/response', {
+      // User's message
+      setChatLog((prev) => [...prev, { user: 'me', message }]);
+  
+      const response = await fetch('http://localhost:3000/response', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ keyword: message }),
       });
-
+  
       if (response.ok) {
         const responseData = await response.json();
-        setChatLog((prev) => [
-          ...prev,
-          { user: 'me', message },
-          { user: 'chat', message: responseData.response },
-        ]);
-        setMessage('');
+  
+        // Wait for 1 second before adding the chat's response
+        setTimeout(() => {
+          setChatLog((prev) => [
+            ...prev,
+            { user: 'chat', message: responseData.response },
+          ]);
+          setMessage('');
+        }, 500);
       } else {
-        console.error('API call failed');
+        // console.error('API call failed');
+        toast.error('API call failed', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
     } catch (error) {
-      console.error('Error during API call:', error);
+      // console.error('Error during API call:', error);
+      toast.error('Error during API call', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
   };
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
-  console.log('Rendering component with chat log:', chatLog);
+  const handleClear = () => {
+    // Clear the chat log from both state and local storage
+    
+    setChatLog([]);
+    localStorage.setItem('chatLog', JSON.stringify([]));
+  };
+  
+  
+
+  // console.log('Rendering component with chat log:', chatLog);
 
   return (
     <div className='flex flex-col min-h-screen bg-[#343541] w-full p-12'>
+      {chatLog.length>0 && 
+      <button 
+      className='rounded-[12px] h-10 w-[180px] hover:bg-zinc-600 m-auto mt-3 mb-3' style={{border: '0.8px solid white'}}
+      onClick={handleClear}>Clear Chats</button>}
       <div
         ref={chatContainerRef}
         className='flex-1 overflow-y-auto'
@@ -87,6 +130,7 @@ const Chatbox: React.FC = () => {
           value={message}
           onChange={handleChange}
         />
+        
         <IoIosSend
           onClick={handleSubmit}
           className='ml-2 cursor-pointer rounded-full hover:bg-zinc-800 p-1'

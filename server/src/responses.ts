@@ -1,5 +1,10 @@
 export const responses = {
     "hello": "Hello! How can I assist you today?",
+    "hi": "Hi! How are you?",
+    "fine": "That's great! If there's anything specific you'd like to chat about or ask, feel free to let me know!",
+    "good morning":"Good morning to you too!",
+    "good night": "Good night",
+    "good evening": "Good evening",
     "weather": "The current weather is sunny with a temperature of 25°C.",
     "greetings": "Greetings! What can I do for you?",
     "time": "The current time is 2:30 PM.",
@@ -117,5 +122,24 @@ export const responses = {
     "traveltips": "Plan your travels with helpful travel tips.",
    
     "coding101": "Get started with coding basics and foundational concepts.",
-    
+    "chat": "Let's chat! How's your day going?",
+  "fun": "Having fun? Let's make it even better!",
+  "easy": "Easy peasy! What can I help you with?",
+  "cool": "Cool! Anything on your mind?",
+  "friend": "Hey friend! What's new?",
+  "happy": "Happy to chat! What's up?",
+  "simple": "Keeping it simple! How can I assist you?",
+  "nice": "Nice to see you! How can I make your day better?",
+  "quick": "Quick question? I'm here to help!",
+  "awesome": "Awesome! What brings you here?",
+  "busy": "Busy day? Take a break and chat with me!",
+  "enjoy": "Enjoying your day? Let's chat about it!",
+  "hey": "Hey there! Ready for a chat?",
+  "hobby": "Got a hobby? Let's chat about it!",
+  "chill": "Chillin' here! What's on your mind?",
+  
+  "talk": "Want to talk? I'm all ears!",
+  "smile": "Smile! What can I do for you today?",
+  "relax": "Time to relax! Anything I can do for you?",
+  "laugh": "Laugh a little! What's making you smile today?",
 }
