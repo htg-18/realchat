@@ -15,7 +15,7 @@ Clone the project
 Go to the client directory
 
 ```bash
-  cd .\chatterbot-x\client\
+  cd .\realchat\client\
 ```
 
 Install dependencies
@@ -29,11 +29,11 @@ Start the frontend
 ```bash
   npm run dev
 ```
-
+Open a new Terminal Window To Run the Backend
 Go to the server directory
 
 ```bash
-   cd .\chatterbot-x\server\
+   cd .\realchat\server\
 ```
 
 Install dependencies
