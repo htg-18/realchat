@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const corsOptions: CorsOptions = {
-    origin: 'http://localhost:5173', // Specify the allowed origin
+    origin: 'https://realchat-omega.vercel.app/', // Specify the allowed origin
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   };
