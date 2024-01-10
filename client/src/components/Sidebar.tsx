@@ -31,7 +31,7 @@ const Sidebar = () => {
     justifyContent: 'center',
     alignItems: 'center',
     fontWeight: 'bold',
-    fontSize: '2xl',
+    fontSize: '25px',
     cursor: 'pointer',
   };
 

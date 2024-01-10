@@ -1,8 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import Chats from './Chats';
 import { IoIosSend } from 'react-icons/io';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Default from './Default';
+import KeywordButtons from './KeywordButtons';
 
 interface ChatMessage {
   user: string;
@@ -36,11 +38,12 @@ const Chatbox: React.FC = () => {
     }
   }, [chatLog]);
 
+  const [loading,setLoading] =useState<boolean>(false)
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+    if(message==="") return false
     try {
-      // User's message
+      setLoading(true);
       setChatLog((prev) => [...prev, { user: 'me', message }]);
   
       const response = await fetch('http://localhost:3000/response', {
@@ -56,6 +59,7 @@ const Chatbox: React.FC = () => {
   
         // Wait for 1 second before adding the chat's response
         setTimeout(() => {
+          
           setChatLog((prev) => [
             ...prev,
             { user: 'chat', message: responseData.response },
@@ -87,6 +91,8 @@ const Chatbox: React.FC = () => {
         progress: undefined,
         theme: "light",
         });
+    }finally {
+      setLoading(false);
     }
   };
   
@@ -96,47 +102,56 @@ const Chatbox: React.FC = () => {
   };
 
   const handleClear = () => {
-    // Clear the chat log from both state and local storage
-    
     setChatLog([]);
     localStorage.setItem('chatLog', JSON.stringify([]));
   };
+  const inputRef = useRef<HTMLInputElement>(null);
+  const handleKeywordClick = async (keyword: string) => {
+    setMessage(keyword);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
   
   
-
-  // console.log('Rendering component with chat log:', chatLog);
-
-  return (
+  
+ return (
     <div className='flex flex-col min-h-screen bg-[#343541] w-full p-12'>
       {chatLog.length>0 && 
       <button 
       className='rounded-[12px] h-10 w-[180px] hover:bg-zinc-600 m-auto mt-3 mb-3' style={{border: '0.8px solid white'}}
       onClick={handleClear}>Clear Chats</button>}
+      {chatLog.length===0 && <Default/>}
+      
       <div
         ref={chatContainerRef}
-        className='flex-1 overflow-y-auto'
+        className=' overflow-y-auto'
         style={{ maxHeight: '70vh', scrollbarWidth: 'thin', scrollbarColor: '#ffffff #343541' }}
       >
         <Chats chatLog={chatLog} />
       </div>
+      {chatLog.length==0 && <KeywordButtons keywords={['Greeting', 'Weather', 'News', 'Help','Anime','Movie','Food']} onKeywordClick={handleKeywordClick} />}
       <form
         onSubmit={handleSubmit}
         style={{ border: '0.5px solid white ', borderRadius: '12px' }}
         className='fixed bottom-6  p-2 pl-4 pr-4 flex items-center w-[70%] bg-zinc-700 justify-between '
       >
+       
         <input
+          ref={inputRef}
           className='w-[70%] p-2 border rounded bg-zinc-700 outline-none border-none text-white'
           placeholder='Message ChatterBotX...'
           value={message}
           onChange={handleChange}
+          disabled={loading}
         />
         
-        <IoIosSend
+        {!loading && <IoIosSend
           onClick={handleSubmit}
-          className='ml-2 cursor-pointer rounded-full hover:bg-zinc-800 p-1'
+          className={`ml-2 cursor-pointer rounded-full hover:bg-zinc-800 p-1 `}
           size={34}
           color='#ffffff'
-        />
+        />}
       </form>
       <style>
         {`

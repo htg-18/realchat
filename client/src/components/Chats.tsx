@@ -1,5 +1,3 @@
-
-
 interface ChatLogItem {
     user: string;
     message: string;
@@ -25,12 +23,6 @@ const Chats: React.FC<ChatsProps> = ({ chatLog }) => {
             )
         })}
         <div className='flex items-center'>
-          
-
-            {/* <div className='bg-white h-9 w-9' style={{ borderRadius: "50%" }}></div>
-            <div className='pl-4'>
-                Hello world!
-            </div> */}
         </div>
         </div>
     )

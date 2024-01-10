@@ -6,7 +6,7 @@ export const responses = {
     "good night": "Good night",
     "good evening": "Good evening",
     "weather": "The current weather is sunny with a temperature of 25°C.",
-    "greetings": "Greetings! What can I do for you?",
+    "greeting": "Greetings! What can I do for you?",
     "time": "The current time is 2:30 PM.",
     "joke": "Why don't scientists trust atoms? Because they make up everything!",
     "help": "I'm here to help. What do you need assistance with?",
