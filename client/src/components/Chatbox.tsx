@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Chats from './Chats';
 import { IoIosSend } from 'react-icons/io';
 
@@ -37,7 +37,7 @@ const Chatbox: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://chat-backend-gold.vercel.app/response', {
+      const response = await fetch('https://realchat-kora.vercel.app/response', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
