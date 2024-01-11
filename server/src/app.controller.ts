@@ -1,6 +1,5 @@
 import { Controller, Get, Post, Body, Res } from '@nestjs/common';
 import { AppService } from './app.service';
-import { responses } from './responses';
 
 @Controller()
 export class AppController {
@@ -10,29 +9,12 @@ export class AppController {
   getHello(st: string): string {
     return this.appService.getHello('Hello');
   }
-
-  @Get('bye')
-  getBye(st: string): string {
-    return this.appService.getBye('Bye');
-  }
-
+  //writing a post request on /response route to get the reply from the chatbot
   @Post('response')
   getResponse(@Body('keyword') keyword: string, @Res() res): void {
-    // Convert keyword to lowercase for case-insensitive comparison
-    const lowercaseKeyword = keyword.toLowerCase();
-    console.log(lowercaseKeyword)
-    // Check if the lowercase keyword is present in the lowercase keys of responses
-    const matchedKeys = Object.keys(responses).filter(
-      (key) => lowercaseKeyword.includes(key)
-    );
-     console.log(matchedKeys)
-    // Build the final response string based on matched keys
-    const finalResponse =
-      matchedKeys.length > 0
-        ? matchedKeys.map((key) => responses[key]).join(' ')
-        : 'Sorry, I could not understand that';
-
-    // Send the response as JSON
+    //calling the getResponse method from the appService
+    const finalResponse = this.appService.getResponse(keyword);
+    //the frontend expects the response in this format
     res.json({ response: finalResponse });
   }
 }

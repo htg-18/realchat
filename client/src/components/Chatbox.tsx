@@ -21,7 +21,7 @@ const Chatbox: React.FC = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // console.log('Fetching chat log from local storage.  1 ..');
+    //fetching the chats from the localStorage
     const storedChatLog = localStorage.getItem('chatLog');
     if (storedChatLog) {
       setChatLog(JSON.parse(storedChatLog));
@@ -29,8 +29,7 @@ const Chatbox: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // console.log('Storing chat log to local storage.  2..');
-    
+    //storing the chats to the localstorage when the chatLog changes
     localStorage.setItem('chatLog', JSON.stringify(chatLog));
 
     if (chatContainerRef.current) {
@@ -45,7 +44,7 @@ const Chatbox: React.FC = () => {
     try {
       setLoading(true);
       setChatLog((prev) => [...prev, { user: 'me', message }]);
-  
+      //calling the backend API that will return a response
       const response = await fetch('http://localhost:3000/response', {
         method: 'POST',
         headers: {
@@ -57,7 +56,7 @@ const Chatbox: React.FC = () => {
       if (response.ok) {
         const responseData = await response.json();
   
-        // Wait for 1 second before adding the chat's response
+        // Wait for 0.5 sec second before adding the chat's response
         setTimeout(() => {
           
           setChatLog((prev) => [
@@ -67,7 +66,7 @@ const Chatbox: React.FC = () => {
           setMessage('');
         }, 500);
       } else {
-        // console.error('API call failed');
+        //toast to enhance the User Experience
         toast.error('API call failed', {
           position: "top-right",
           autoClose: 5000,
@@ -80,7 +79,7 @@ const Chatbox: React.FC = () => {
           });
       }
     } catch (error) {
-      // console.error('Error during API call:', error);
+      //toast to enhance the User Experience
       toast.error('Error during API call', {
         position: "top-right",
         autoClose: 5000,
@@ -102,17 +101,30 @@ const Chatbox: React.FC = () => {
   };
 
   const handleClear = () => {
+    //clearing the local storage on clicking the clear button
     setChatLog([]);
     localStorage.setItem('chatLog', JSON.stringify([]));
   };
   const inputRef = useRef<HTMLInputElement>(null);
   const handleKeywordClick = async (keyword: string) => {
+    //Just to give some common inputs to the user like CHATGPT
+    //If clicked on the button the value in the input is assigned to the buttons value
     setMessage(keyword);
     if (inputRef.current) {
       inputRef.current.focus();
     }
   };
-  const shouldRenderDefaultAndKeywordButtons = window.innerWidth > 700;
+  const [shouldRenderDefaultAndKeywordButtons, setShouldRenderDefaultAndKeywordButtons] = useState(window.innerWidth > 700);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setShouldRenderDefaultAndKeywordButtons(window.innerWidth > 700);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }); 
   return (
     <div className='flex flex-col min-h-screen bg-[#343541] w-full p-12'>
       {chatLog.length>0 && 

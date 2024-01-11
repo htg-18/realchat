@@ -1,26 +1,7 @@
-
-
-// const Sidebar = () => {
-//   return (
-//     <aside className='w-[240px] bg-[#202123] h-screen flex justify-center items-center font-bold text-2xl
-//       cursor-pointer sticky top-0
-//     '>
-//         ChatterBotX
-//     </aside>
-//   )
-// }
-
-// export default Sidebar
-
-// Sidebar.tsx
-
-// Sidebar.tsx
-
-// Sidebar.tsx
-
 import React, { useState, useEffect } from 'react';
 
 const Sidebar = () => {
+  //Making the design reposnsive by adding custom styles
   const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
 
   const sidebarStyle: React.CSSProperties = {
