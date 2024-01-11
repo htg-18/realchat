@@ -5,6 +5,14 @@ A Chat application that uses React and Typescript in the frontend and Nestjs in 
 
 
 ## Run Locally
+Make a new folder.Open it in VS Code
+
+Start the terminal
+
+```bash
+  ctrl+`
+```
+
 
 Clone the project
 
@@ -15,7 +23,7 @@ Clone the project
 Go to the client directory
 
 ```bash
-  cd .\realchat\client\
+  cd .\chatterbot-x\client\
 ```
 
 Install dependencies
@@ -29,11 +37,11 @@ Start the frontend
 ```bash
   npm run dev
 ```
-Open a new Terminal Window To Run the Backend
+
 Go to the server directory
 
 ```bash
-   cd .\realchat\server\
+   cd .\chatterbot-x\server\
 ```
 
 Install dependencies
@@ -47,4 +55,5 @@ Start the frontend
 ```bash
   npm run start:dev
 ```
+
 
