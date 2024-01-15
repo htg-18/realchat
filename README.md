@@ -23,7 +23,7 @@ Clone the project
 Go to the client directory
 
 ```bash
-  cd .\chatterbot-x\client\
+  cd .\realchat\client\
 ```
 
 Install dependencies
@@ -41,7 +41,7 @@ Start the frontend
 Go to the server directory
 
 ```bash
-   cd .\chatterbot-x\server\
+   cd .\realchat\server\
 ```
 
 Install dependencies
