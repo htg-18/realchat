@@ -1,6 +1,5 @@
-import Chatbox from "./components/Chatbox"
-import Sidebar from "./components/Sidebar"
-import { ToastContainer, toast } from 'react-toastify';
+import { Chatbox,Sidebar } from './components';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
