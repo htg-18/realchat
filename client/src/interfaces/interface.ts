@@ -7,4 +7,9 @@ export interface ChatLogItem {
 export interface ChatsProps {
     chatLog: ChatLogItem[];
 }
+
+export interface KeywordButtonsProps {
+    keywords: string[];
+    onKeywordClick: (keyword: string) => void;
+  }
   

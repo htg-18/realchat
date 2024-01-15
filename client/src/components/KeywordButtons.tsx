@@ -1,10 +1,11 @@
 
 import React from 'react';
+import { KeywordButtonsProps } from '../interfaces/interface';
 
-interface KeywordButtonsProps {
-  keywords: string[];
-  onKeywordClick: (keyword: string) => void;
-}
+// interface KeywordButtonsProps {
+//   keywords: string[];
+//   onKeywordClick: (keyword: string) => void;
+// }
 
 const KeywordButtons: React.FC<KeywordButtonsProps> = ({ keywords, onKeywordClick }) => {
   return (

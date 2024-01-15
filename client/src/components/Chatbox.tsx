@@ -21,13 +21,13 @@ const Chatbox: React.FC = () => {
   
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    //fetching the chats from the localStorage
-    const storedChatLog = localStorage.getItem('chatLog');
-    if (storedChatLog) {
-      setChatLog(JSON.parse(storedChatLog));
-    }
-  }, []);
+  // useEffect(() => {
+  //   //fetching the chats from the localStorage
+  //   const storedChatLog = localStorage.getItem('chatLog');
+  //   if (storedChatLog) {
+  //     setChatLog(JSON.parse(storedChatLog));
+  //   }
+  // }, []);
 
   useEffect(() => {
     //storing the chats to the localstorage when the chatLog changes
@@ -56,10 +56,8 @@ const Chatbox: React.FC = () => {
   
       if (response.ok) {
         const responseData = await response.json();
-  
         // Wait for 0.5 sec second before adding the chat's response
         setTimeout(() => {
-          
           setChatLog((prev) => [
             ...prev,
             { user: 'chat', message: responseData.response },
@@ -96,7 +94,6 @@ const Chatbox: React.FC = () => {
     }
   };
   
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
@@ -107,7 +104,7 @@ const Chatbox: React.FC = () => {
     localStorage.setItem('chatLog', JSON.stringify([]));
   };
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleKeywordClick = async (keyword: string) => {
+  const handleKeywordClick = async (keyword: string):Promise<void> => {
     //Just to give some common inputs to the user like CHATGPT
     //If clicked on the button the value in the input is assigned to the buttons value
     setMessage(keyword);
@@ -123,6 +120,7 @@ const Chatbox: React.FC = () => {
     };
     window.addEventListener('resize', handleResize);
     return () => {
+      //eventListener cleanup during the unmounting process
       window.removeEventListener('resize', handleResize);
     };
   }); 
