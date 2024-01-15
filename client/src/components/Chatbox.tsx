@@ -5,14 +5,15 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Default from './Default';
 import KeywordButtons from './KeywordButtons';
+import { ChatLogItem as ChatMessage } from '../interfaces/interface';
 
-interface ChatMessage {
-  user: string;
-  message: string;
-}
+// interface ChatMessage {
+//   user: string;
+//   message: string;
+// }
 
 const Chatbox: React.FC = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState<string>('');
   const localchat: any = localStorage.getItem('chatLog');
   const parsedChatLog = localchat ? JSON.parse(localchat) : [];
   
@@ -114,7 +115,7 @@ const Chatbox: React.FC = () => {
       inputRef.current.focus();
     }
   };
-  const [shouldRenderDefaultAndKeywordButtons, setShouldRenderDefaultAndKeywordButtons] = useState(window.innerWidth > 700);
+  const [shouldRenderDefaultAndKeywordButtons, setShouldRenderDefaultAndKeywordButtons] = useState<boolean>(window.innerWidth > 700);
 
   useEffect(() => {
     const handleResize = () => {

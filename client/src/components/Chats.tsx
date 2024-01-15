@@ -1,11 +1,13 @@
-interface ChatLogItem {
-    user: string;
-    message: string;
-}
+import { ChatsProps } from "../interfaces/interface";
 
-interface ChatsProps {
-    chatLog: ChatLogItem[];
-}
+// interface ChatLogItem {
+//     user: string;
+//     message: string;
+// }
+
+// interface ChatsProps {
+//     chatLog: ChatLogItem[];
+// }
 
 const Chats: React.FC<ChatsProps> = ({ chatLog }) => {
     return (
